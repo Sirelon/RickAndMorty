@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="?attr/colorPrimary"
+    app:cardBackgroundColor="?attr/colorPrimaryDark"
     app:cardUseCompatPadding="true"
     app:contentPadding="8dp">
 
@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/repoName"
+            android:id="@+id/characterName"
             style="@style/TextAppearance.AppCompat.SearchResult.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -26,15 +26,15 @@
             tools:text="@tools:sample/full_names" />
 
         <TextView
-            android:id="@+id/repoDescription"
+            android:id="@+id/characterRace"
             style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:paddingVertical="8dp"
             app:layout_constraintEnd_toStartOf="@+id/repoStars"
-            app:layout_constraintStart_toStartOf="@id/repoName"
-            app:layout_constraintTop_toBottomOf="@+id/repoName"
+            app:layout_constraintStart_toStartOf="@id/characterName"
+            app:layout_constraintTop_toBottomOf="@+id/characterName"
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
@@ -47,9 +47,9 @@
             android:padding="8dp"
             android:textColor="@color/colorAccent"
             android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="@+id/repoDescription"
+            app:layout_constraintBottom_toBottomOf="@+id/characterRace"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/repoName"
+            app:layout_constraintTop_toTopOf="@id/characterName"
             tools:text="12321" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

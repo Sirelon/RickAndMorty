@@ -24,7 +24,7 @@ class ServerCharacter(
     val status: String,
     @SerializedName("species")
     val species: String,
-    @SerializedName("url")
+    @SerializedName("image")
     val image: String
 )
 

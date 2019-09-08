@@ -14,10 +14,9 @@ open class BaseViewModel : ViewModel() {
 
     fun onError(e: Throwable) {
         e.printStackTrace()
-        // Actually I would like to parse error in some util method, or somewhere in API class or repository, but this is simple project, right?
         if (e is retrofit2.HttpException) {
             val json = JSONObject(e.response()?.errorBody()?.string())
-            val message = json.getString("message")
+            val message = json.getString("error")
             errosLiveData.postValue(RuntimeException(message))
         } else {
             errosLiveData.postValue(e)

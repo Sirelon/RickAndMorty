@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sirelon.rickandmorty.R
 import com.sirelon.rickandmorty.feature.character.Character
 import com.sirelon.rickandmorty.utils.inflate
+import com.sirelon.rickandmorty.utils.loadImageUrl
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_fav_character.*
 
 /**
  * Created on 2019-09-05 22:09 for RickAndMorty.
@@ -22,7 +24,12 @@ class CharactersPagedListAdapter(private val onItemClick: (character: Character)
 
     override fun onBindViewHolder(holder: FavoriteCharacterViewHolder, position: Int) {
         val character = getItem(position) ?: return
-        holder.itemView.setOnClickListener { onItemClick(character) }
+        with(holder){
+            itemView.setOnClickListener { onItemClick(character) }
+            characterName.text = character.name
+            characterImage.loadImageUrl(character.imageUrl)
+        }
+
     }
 
     class FavoriteCharacterViewHolder(override val containerView: View) : LayoutContainer,

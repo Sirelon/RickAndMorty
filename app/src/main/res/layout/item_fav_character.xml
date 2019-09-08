@@ -4,38 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?attr/selectableItemBackground"
-    app:cardUseCompatPadding="true"
-    app:contentPadding="8dp">
+    android:layout_margin="8dp"
+    android:foreground="?attr/selectableItemBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/repoName"
-            style="@style/TextAppearance.AppCompat.SearchResult.Title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            app:layout_constraintEnd_toStartOf="@+id/repoStars"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/full_names" />
+        <ImageView
+            android:id="@+id/characterImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toTopOf="@+id/characterName"
+            tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/repoDescription"
-            style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+            android:id="@+id/characterName"
+            style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="2"
-            android:paddingVertical="8dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/characterImage"
             app:layout_constraintEnd_toStartOf="@+id/repoStars"
-            app:layout_constraintStart_toStartOf="@id/repoName"
-            app:layout_constraintTop_toBottomOf="@+id/repoName"
-            tools:text="@tools:sample/lorem/random" />
+            app:layout_constraintStart_toStartOf="@+id/characterImage"
+            tools:text="@tools:sample/full_names" />
 
         <TextView
             android:id="@+id/repoStars"
@@ -47,9 +42,9 @@
             android:padding="8dp"
             android:textColor="@color/colorAccent"
             android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="@+id/repoDescription"
+            app:layout_constraintBottom_toBottomOf="@+id/characterName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/repoName"
+            app:layout_constraintTop_toTopOf="@id/characterName"
             tools:text="12321" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
