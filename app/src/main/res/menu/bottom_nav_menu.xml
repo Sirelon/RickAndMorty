@@ -7,7 +7,7 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/navigation_to_favorite"
+        android:id="@+id/navigation_favorite"
         android:icon="@drawable/ic_favorite_selector"
         android:title="Favorite" />
 

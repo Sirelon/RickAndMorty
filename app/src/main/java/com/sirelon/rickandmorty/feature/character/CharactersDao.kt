@@ -1,5 +1,6 @@
 package com.sirelon.rickandmorty.feature.character
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
@@ -15,4 +16,7 @@ interface CharactersDao : CommonDao<Character> {
 
     @Query("SELECT isFavorite FROM characters WHERE id = :id")
     fun isItemFavorite(id: Long): Boolean
+
+    @Query("SELECT * FROM characters WHERE id = :id")
+    fun loadItem(id: Long): LiveData<Character?>
 }

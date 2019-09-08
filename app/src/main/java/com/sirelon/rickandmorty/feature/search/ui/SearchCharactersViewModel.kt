@@ -96,11 +96,7 @@ class SearchCharactersViewModel(
 
     fun changeFavoriteState(item: Character) {
         viewModelScope.launch(Dispatchers.IO) {
-            if (item.isFavorite) {
-                itemsRepository.removeFromFavorite(item)
-            } else {
-                itemsRepository.addToFavorite(item)
-            }
+           itemsRepository.changeFavoriteState(item)
         }
     }
 

@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FavoriteCharactersViewModel(private val repository: CharactersRepository) : BaseViewModel() {
-    val allRepositories = repository.loadAll().toLiveData(10)
+    val allRepositories = repository.loadAllFavorites().toLiveData(10)
 
     fun removeItem(item: Character) {
         viewModelScope.launch(Dispatchers.IO) {

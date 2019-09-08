@@ -9,12 +9,29 @@
         android:id="@+id/navigation_home"
         android:name="com.sirelon.rickandmorty.feature.search.ui.SearchCharactersFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search_characters" />
+        tools:layout="@layout/fragment_search_characters" >
+        <action
+            android:id="@+id/action_navigation_home_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_to_favorite"
+        android:id="@+id/navigation_favorite"
         android:name="com.sirelon.rickandmorty.feature.favorite.FavoriteCharactersFragment"
         android:label="Saved"
-        tools:layout="@layout/fragment_favorite_list" />
+        tools:layout="@layout/fragment_favorite_list" >
+        <action
+            android:id="@+id/action_navigation_favorite_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.sirelon.rickandmorty.feature.character.ui.CharacterDetailFragment"
+        android:label="Character Detail"
+        tools:layout="@layout/fragment_character_detail" >
+        <argument
+            android:name="characterId"
+            app:argType="long" />
+    </fragment>
 
 </navigation>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".feature.character.ui.CharacterDetailFragment">
+
+    <ImageView
+        android:id="@+id/characterImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@+id/characterName"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/characterName"
+        style="@style/TextAppearance.AppCompat.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/characterImage"
+        app:layout_constraintEnd_toStartOf="@+id/actionFavorite"
+        app:layout_constraintStart_toStartOf="@+id/characterImage"
+        tools:text="@tools:sample/full_names" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/actionFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
+        android:padding="16dp"
+        android:src="@drawable/ic_favorite_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/characterImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/characterName"
+        app:useCompatPadding="true"
+        tools:text="12321" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/detailsGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="actionFavorite,characterImage,characterName" />
+
+    <include layout="@layout/empty_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

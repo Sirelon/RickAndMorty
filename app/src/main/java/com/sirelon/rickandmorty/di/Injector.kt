@@ -4,9 +4,10 @@ import android.app.Application
 import androidx.room.Room
 import com.sirelon.rickandmorty.database.AppDataBase
 import com.sirelon.rickandmorty.feature.character.CharactersRepository
+import com.sirelon.rickandmorty.feature.character.ui.CharacterDetailViewModel
 import com.sirelon.rickandmorty.feature.favorite.FavoriteCharactersViewModel
 import com.sirelon.rickandmorty.feature.search.SearchRepository
-import com.sirelon.rickandmorty.feature.search.network.SearchApi
+import com.sirelon.rickandmorty.feature.search.network.CharactersApi
 import com.sirelon.rickandmorty.feature.search.ui.SearchCharactersViewModel
 import com.sirelon.rickandmorty.network.createSimpleRetrofit
 import org.koin.android.ext.koin.androidContext
@@ -34,9 +35,9 @@ object Injector {
             modules(
                 listOf(
                     commonModule(),
-                    repositoryModule(),
+                    charactersModule(),
                     searchModule(),
-                    viewedRepositoriesModule()
+                    favoriteModule()
                 )
             )
         }
@@ -59,21 +60,22 @@ object Injector {
     /**
      * Module for repository feature
      */
-    private fun repositoryModule() = module {
+    private fun charactersModule() = module {
         single { get<AppDataBase>().charactersDao() }
-        factory { CharactersRepository(get()) }
+        factory { CharactersRepository(get(), get()) }
+        viewModel { CharacterDetailViewModel(get()) }
     }
 
     /**
      * Module for search repositories feature
      */
     private fun searchModule() = module {
-        single { get<Retrofit>().create(SearchApi::class.java) }
+        single { get<Retrofit>().create(CharactersApi::class.java) }
         factory { SearchRepository(get()) }
         viewModel { SearchCharactersViewModel(get(), get()) }
     }
 
-    private fun viewedRepositoriesModule() = module {
+    private fun favoriteModule() = module {
         viewModel { FavoriteCharactersViewModel(get()) }
     }
 }
