@@ -15,10 +15,12 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * Created on 2019-09-05 21:29 for RickAndMorty.
@@ -57,11 +59,22 @@ class SearchCharactersViewModel(
                     }
 
         // Create dataSource factory
+        val paginationScope = CoroutineScope(contextWithErrorHandling)
         val dataSourceFactory =
-            SearchDataSourceFactory(searchRepository, CoroutineScope(contextWithErrorHandling))
+            SearchDataSourceFactory(searchRepository, paginationScope)
+
+        val mappedDataSourceFactory = dataSourceFactory.map {
+            // Start in paralallel loading info from database
+            paginationScope.async {
+                it.isFavorite = itemsRepository.isCharacterFavorite(it)
+                it
+            }
+        }
+            // No promblem with runBlocking, 'cause we already in BG
+            .map { runBlocking { it.await() } }
 
         // Create LiveData with congif and datasource
-        characterListLiveData = LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
+        characterListLiveData = LivePagedListBuilder(mappedDataSourceFactory, pagedListConfig).build()
 
         searchKeywordChannel = Channel(Channel.CONFLATED)
 
@@ -81,9 +94,13 @@ class SearchCharactersViewModel(
         searchKeywordChannel.offer(string)
     }
 
-    fun markAsViewed(item: Character) {
+    fun changeFavoriteState(item: Character) {
         viewModelScope.launch(Dispatchers.IO) {
-            itemsRepository.addToFavorite(item)
+            if (item.isFavorite) {
+                itemsRepository.removeFromFavorite(item)
+            } else {
+                itemsRepository.addToFavorite(item)
+            }
         }
     }
 

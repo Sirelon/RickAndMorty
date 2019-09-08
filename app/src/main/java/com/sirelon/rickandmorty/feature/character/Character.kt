@@ -14,5 +14,8 @@ data class Character(
     val imageUrl: String,
 
     val isAlive: Boolean,
-    val race: String
+    val race: String,
+
+    var isFavorite: Boolean = false
+
 )

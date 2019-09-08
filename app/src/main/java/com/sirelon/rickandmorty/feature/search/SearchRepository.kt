@@ -11,7 +11,10 @@ class SearchRepository(private val searchApi: SearchApi) {
 
     suspend fun searchByName(query: String, page: Int): List<Character> {
         val response = searchApi.searchRepositories(query, page)
-        return response.result.map(ServerCharacter::map)
+        return response.result
+            .asSequence()
+            .map(ServerCharacter::map)
+            .toList()
     }
 }
 

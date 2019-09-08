@@ -4,11 +4,11 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_search"
-        android:title="Search" />
+        android:title="Home" />
 
     <item
         android:id="@+id/navigation_to_favorite"
-        android:icon="@drawable/ic_book"
-        android:title="Saved" />
+        android:icon="@drawable/ic_favorite_selector"
+        android:title="Favorite" />
 
 </menu>

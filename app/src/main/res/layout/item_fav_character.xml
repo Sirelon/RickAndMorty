@@ -28,21 +28,19 @@
             android:maxLines="2"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/characterImage"
-            app:layout_constraintEnd_toStartOf="@+id/repoStars"
+            app:layout_constraintEnd_toStartOf="@+id/actionFavorite"
             app:layout_constraintStart_toStartOf="@+id/characterImage"
             tools:text="@tools:sample/full_names" />
 
-        <TextView
-            android:id="@+id/repoStars"
+        <ImageView
+            android:id="@+id/actionFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/ic_star"
-            android:drawableTint="?attr/colorAccent"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:gravity="center"
-            android:padding="8dp"
-            android:textColor="@color/colorAccent"
-            android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="@+id/characterName"
+            android:padding="16dp"
+            android:src="@drawable/ic_favorite_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/characterImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/characterName"
             tools:text="12321" />

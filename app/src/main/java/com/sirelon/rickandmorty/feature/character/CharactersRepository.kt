@@ -8,10 +8,11 @@ import androidx.annotation.WorkerThread
  */
 class CharactersRepository(private val charactersDao: CharactersDao) {
 
-    fun loadAll() = charactersDao.loadAll()
+    fun loadAll() = charactersDao.loadAllFavorites()
 
     @WorkerThread
     suspend fun addToFavorite(item: Character) {
+        item.isFavorite = true
         charactersDao.insert(item)
     }
 
@@ -24,6 +25,11 @@ class CharactersRepository(private val charactersDao: CharactersDao) {
     suspend fun updateCharactersList(list: List<Character>) {
         val updated = charactersDao.updateAll(list)
         Log.d("Sirelon", "updateCharactersList: updated $updated")
+    }
+
+    @WorkerThread
+    suspend fun isCharacterFavorite(character: Character): Boolean {
+        return charactersDao.isItemFavorite(character.id)
     }
 
 }

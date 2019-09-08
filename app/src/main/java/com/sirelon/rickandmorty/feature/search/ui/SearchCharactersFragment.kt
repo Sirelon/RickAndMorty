@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.sirelon.rickandmorty.R
 import com.sirelon.rickandmorty.feature.base.BaseFragment
+import com.sirelon.rickandmorty.feature.character.Character
 import com.sirelon.rickandmorty.feature.character.ui.CharactersPagedListAdapter
+import com.sirelon.rickandmorty.utils.hideKeyboard
 import com.sirelon.rickandmorty.utils.onTextChange
 import kotlinx.android.synthetic.main.fragment_search_characters.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,11 +21,14 @@ class SearchCharactersFragment : BaseFragment(R.layout.fragment_search_character
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.hideKeyboard()
+
         subsribeForErrors(viewModel)
 
-        val searchAdapter = CharactersPagedListAdapter(viewModel::markAsViewed)
+        val searchAdapter =
+            CharactersPagedListAdapter(this::openDetails, viewModel::changeFavoriteState)
         with(repositoriesList) {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = searchAdapter
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
@@ -33,5 +38,9 @@ class SearchCharactersFragment : BaseFragment(R.layout.fragment_search_character
         searchInput.editText?.onTextChange {
             viewModel.onSearchTyped(it?.toString())
         }
+    }
+
+    private fun openDetails(character: Character) {
+
     }
 }
